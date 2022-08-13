@@ -8,12 +8,11 @@ package model;
  *
  * @author jhonatan
  */
-class ContaCorrente  implements IContaCorrente {
+class ContaCorrente extends Conta {
     private String numero;
     private double saldo;
     private boolean ativa;
     private Usuario usuario;
-    private String CPF;
 
     public ContaCorrente(String numero, double saldo, boolean ativa, Usuario usuario) {
         this.numero = numero;
@@ -50,7 +49,7 @@ class ContaCorrente  implements IContaCorrente {
     }
 
     @Override
-    public void transferir(double valor, IContaCorrente contaDestino) {
+    public void transferir(double valor, Conta contaDestino) {
         contaDestino.depositar(valor);
     }
     

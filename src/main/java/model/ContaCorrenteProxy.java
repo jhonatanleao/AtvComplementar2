@@ -10,7 +10,7 @@ import Util.GerenciadorDeSeguranca;
  *
  * @author jhonatan
  */
-public class ContaCorrenteProxy implements IContaCorrente {
+public class ContaCorrenteProxy extends Conta {
     private GerenciadorDeSeguranca gerenciadorSeguranca;
     private ContaCorrente conta;
     private Usuario usuario;
@@ -39,7 +39,7 @@ public class ContaCorrenteProxy implements IContaCorrente {
     }
 
     @Override
-    public void transferir(double valor, IContaCorrente contaDestino) {
+    public void transferir(double valor, Conta contaDestino) {
 
     }
 

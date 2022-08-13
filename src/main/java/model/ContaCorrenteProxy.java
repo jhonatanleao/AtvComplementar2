@@ -4,21 +4,33 @@
  */
 package model;
 
+import Util.GerenciadorDeSeguranca;
+
 /**
  *
  * @author jhonatan
  */
 public class ContaCorrenteProxy implements IContaCorrente {
+    private GerenciadorDeSeguranca gerenciadorSeguranca;
+    private ContaCorrente conta;
     private Usuario usuario;
     
     @Override
     public void depositar(double valor) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if(gerenciadorSeguranca.autorizaDebitar(usuario)){
+            conta.depositar(valor);
+        } else {
+            System.out.println("não foi possivel realizar a operação de debitar");
+        }
     }
 
     @Override
     public void sacar(double valor) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if(gerenciadorSeguranca.autorizaCreditar(usuario)){
+            conta.sacar(valor);
+        } else {
+            System.out.println("não foi possivel realizar a operação de creditar");
+        }
     }
 
     @Override
@@ -40,5 +52,13 @@ public class ContaCorrenteProxy implements IContaCorrente {
     public void desativar() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+    public ContaCorrenteProxy(GerenciadorDeSeguranca gerenciadorSeguranca, ContaCorrente conta, Usuario usuario) {
+        this.gerenciadorSeguranca = gerenciadorSeguranca;
+        this.conta = conta;
+        this.usuario = usuario;
+    }
+
+
     
 }

@@ -50,7 +50,7 @@ class ContaCorrente  implements IContaCorrente {
 
     @Override
     public void transferir(double valor, IContaCorrente contaDestino) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        contaDestino.depositar(valor);
     }
     
     @Override

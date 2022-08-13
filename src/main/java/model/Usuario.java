@@ -51,14 +51,16 @@ public class Usuario {
     }
 
     void setAutorizado(boolean isAutorizado) {
-        this.autorizado = autorizado;
+        this.autorizado = isAutorizado;
     }
 
     void setAutenticado(boolean isAutenticado) {
-        this.autenticado = autenticado;
+        this.autenticado = isAutenticado;
     }
     
     void add(String autorizacao){
         autorizacoes.add(autorizacao);
     }
+    
+    
 }

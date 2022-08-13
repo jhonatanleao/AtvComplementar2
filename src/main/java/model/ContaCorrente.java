@@ -13,6 +13,7 @@ class ContaCorrente  implements IContaCorrente {
     private double saldo;
     private boolean ativa;
     private Usuario usuario;
+    private String CPF;
 
     public ContaCorrente(String numero, double saldo, boolean ativa, Usuario usuario) {
         this.numero = numero;

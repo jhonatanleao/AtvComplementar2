@@ -24,4 +24,8 @@ public abstract class Conta {
     public abstract void ativar();
     public abstract void desativar();
     
+    public void receberTransferencia(double valor) {
+
+    }
+    
 }

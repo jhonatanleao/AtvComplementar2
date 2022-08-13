@@ -4,6 +4,8 @@
  */
 package Util;
 
+import Collection.UsuarioCollection;
+import java.util.Set;
 import model.Usuario;
 
 /**
@@ -12,5 +14,5 @@ import model.Usuario;
  */
 public interface Autorizacao {
     
-    public void autoriza(Usuario usuario);
+    public boolean autoriza(Set<String> autorizacoes, String operacao);
 }

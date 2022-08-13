@@ -12,12 +12,12 @@ class ContaCorrente extends Conta {
     private String numero;
     private double saldo;
     private boolean ativa;
-    private Usuario usuario;
+    private Componente usuario;
 
-    public ContaCorrente(String numero, double saldo, boolean ativa, Usuario usuario) {
+    public ContaCorrente(String numero, Componente usuario) {
         this.numero = numero;
-        this.saldo = saldo;
-        this.ativa = ativa;
+        this.saldo = 0;
+        this.ativa = true;
         this.usuario = usuario;
     }
 
@@ -29,7 +29,7 @@ class ContaCorrente extends Conta {
         return saldo;
     }
 
-    public Usuario getUsuario() {
+    public Componente getUsuario() {
         return usuario;
     }
     
@@ -40,34 +40,59 @@ class ContaCorrente extends Conta {
     
     @Override
     public void sacar(double valor){
-        this.saldo -= valor;
+        if(this.saldo > valor){
+            this.saldo -= valor;
+        } else {
+            System.out.println("Saldo insuficiente");
+        }
     }
     
     @Override
     public void pagar(double valor){
-        this.saldo -= valor;
+        if(this.saldo > valor){
+            this.saldo -= valor;
+        } else {
+            System.out.println("Saldo insuficiente");
+        }
     }
 
     @Override
     public void transferir(double valor, Conta contaDestino) {
-        contaDestino.depositar(valor);
+        if(this.saldo > valor){
+            this.saldo -= valor;
+            contaDestino.receberTransferencia(valor);
+        } else {
+            System.out.println("Saldo insuficiente");
+        }        
+        
     }
     
     @Override
     public void ativar(){
-        this.ativa = true;
+        if(this.ativa == true){
+            System.out.println("Sua conta já esta ativa");
+        } else{
+            this.ativa = true;
+            System.out.println("Conta ativa com sucesso");
+        }
+        
     }
     
     @Override
     public void desativar(){
-        this.ativa = false;
+        if(this.ativa == false){
+            System.out.println("Sua conta já esta ativa");
+        } else{
+            this.ativa = true;
+            System.out.println("Conta ativa com sucesso");
+        }
     }
     
     public boolean isAtiva(){
         return this.ativa;
     }
     
-    private void verificaAtiva(){
+    public void desativarContaUsuario(String numero){
         
     }
 

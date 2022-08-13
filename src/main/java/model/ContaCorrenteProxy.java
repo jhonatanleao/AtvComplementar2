@@ -4,61 +4,108 @@
  */
 package model;
 
-import Util.GerenciadorDeSeguranca;
+import Util.GerenciadorDeAutenticacao;
+import Util.GerenciadorDeAutorizacao;
 
 /**
  *
  * @author jhonatan
  */
 public class ContaCorrenteProxy extends Conta {
-    private GerenciadorDeSeguranca gerenciadorSeguranca;
+    private String numero;
+    private GerenciadorDeAutorizacao gerenciadorAutorizacao;
     private ContaCorrente conta;
-    private Usuario usuario;
+    private Componente usuario;
     
     @Override
     public void depositar(double valor) {
-        if(gerenciadorSeguranca.autorizaDebitar(usuario)){
+        if(gerenciadorAutorizacao.autorizaDepositar(usuario.getAutorizacoes())){
+            conta.depositar(valor);
+            System.out.println("Deposito realizado com sucesso");
+        } else {
+            System.out.println("Você não tem permissão para realizar depositos");
+        }
+    }
+    
+    @Override
+    public void receberTransferencia(double valor) {
+        if(gerenciadorAutorizacao.autorizaReceberTransferencia(usuario.getAutorizacoes())){
             conta.depositar(valor);
         } else {
-            System.out.println("não foi possivel realizar a operação de debitar");
+            System.out.println("A conta de destino não ṕode receber depositos");
         }
     }
 
     @Override
     public void sacar(double valor) {
-        if(gerenciadorSeguranca.autorizaCreditar(usuario)){
+        if(gerenciadorAutorizacao.autorizaSacar(usuario.getAutorizacoes())){
             conta.sacar(valor);
+            System.out.println("Saque realizado com sucesso");
         } else {
-            System.out.println("não foi possivel realizar a operação de creditar");
+            System.out.println("Você não tem permissão para realizar saques");
         }
     }
 
     @Override
     public void pagar(double valor) {
-        
+        if(gerenciadorAutorizacao.autorizaPagar(usuario.getAutorizacoes())){
+            conta.pagar(valor);
+            System.out.println("Pagamento realizado com sucesso");
+        } else {
+            System.out.println("Você não tem permissão para realizar pagamentos");
+        }        
     }
 
     @Override
     public void transferir(double valor, Conta contaDestino) {
-
+        if(gerenciadorAutorizacao.autorizaTransferir(usuario.getAutorizacoes())){
+            conta.transferir(valor, contaDestino);
+            System.out.println("Transferencia realizada com sucesso");
+        } else {
+            System.out.println("Você não tem permissão para realizar transferencias");
+        }
     }
 
     @Override
     public void ativar() {
-
+        if(gerenciadorAutorizacao.autorizaAtivar(usuario.getAutorizacoes())){
+            conta.ativar();
+            System.out.println("Conta ativada com sucesso");
+        } else {
+            System.out.println("Você não tem permissão para ativar sua conta. Procure um gerente");
+        }  
     }
 
     @Override
     public void desativar() {
-        
+        if(gerenciadorAutorizacao.autorizaDesativar(usuario.getAutorizacoes())){
+            conta.desativar();
+            System.out.println("Conta desativada com sucesso");
+        } else {
+            System.out.println("Você não tem permissão para desativar sua conta. Procure um gerente");
+        }          
     }
 
-    public ContaCorrenteProxy(GerenciadorDeSeguranca gerenciadorSeguranca, ContaCorrente conta, Usuario usuario) {
-        this.gerenciadorSeguranca = gerenciadorSeguranca;
-        this.conta = conta;
-        this.usuario = usuario;
+    public double getSaldo(){
+        if(gerenciadorAutorizacao.autorizaGetSaldo(usuario.getAutorizacoes())){
+            return conta.getSaldo();
+        } else {
+            System.out.println("Você não tem permissão para ver seu saldo");
+            return 0;
+        }         
+    }
+    
+    public ContaCorrenteProxy(GerenciadorDeAutorizacao gerenciadorAutorizacao, String numero, Componente usuario) {
+        this.gerenciadorAutorizacao = gerenciadorAutorizacao;
+        this.usuario = usuario;     
+        this.conta = new ContaCorrente(numero, usuario);
+        this.numero = numero;
     }
 
+    public String getNumero() {
+        return numero;
+    }
 
+    
     
 }

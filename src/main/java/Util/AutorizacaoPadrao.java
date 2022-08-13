@@ -4,18 +4,18 @@
  */
 package Util;
 
+import java.util.Set;
 import model.Usuario;
 
 /**
  *
  * @author jhonatan
  */
-public class GerenciadorDeSeguranca {
-    public boolean autorizaDebitar(Usuario usuario){
-        return true;
+public class AutorizacaoPadrao implements Autorizacao{
+
+    @Override
+    public boolean autoriza(Set<String> autorizacoes, String operacao) {
+        return autorizacoes.contains(operacao);
     }
     
-    public boolean autorizaCreditar(Usuario usuario){
-        return true;    
-    }    
 }

@@ -4,6 +4,7 @@
  */
 package Util;
 
+import Collection.UsuarioCollection;
 import model.Usuario;
 
 /**
@@ -12,5 +13,5 @@ import model.Usuario;
  */
 public interface Autenticador {
     
-    public boolean valida(Usuario usuario, String entrada);
+    public boolean valida(String nome, String entrada, UsuarioCollection listUsuarios);
 }

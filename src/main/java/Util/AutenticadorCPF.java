@@ -4,6 +4,7 @@
  */
 package Util;
 
+import Collection.UsuarioCollection;
 import model.Usuario;
 
 /**
@@ -13,7 +14,7 @@ import model.Usuario;
 public class AutenticadorCPF implements Autenticador{
 
     @Override
-    public boolean valida(Usuario usuario, String entrada) {
-        return usuario.getCPF().equals(entrada);
+    public boolean valida(String nome, String entrada, UsuarioCollection listUsuarios) {
+        return listUsuarios.buscaByNameNCPF(nome, entrada);
     }    
 }

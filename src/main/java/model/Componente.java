@@ -31,26 +31,48 @@ public abstract class Componente {
         this.CPF = CPF;
     }
 
-    public abstract String getNome();
+    public String getNome(){
+        return this.nome;
+    }
 
-    public abstract String getPerfil();
+    public String getPerfil(){
+        return this.perfil;
+    }
 
-    public abstract String getNomeUsuario();
+    public String getNomeUsuario(){
+        return this.nomeUsuario;
+    }
 
-    public abstract String getSenha();
+    public String getSenha(){
+        return this.senha;
+    }
 
-    public abstract Set<String> getAutorizacoes();
+    public Set<String> getAutorizacoes(){
+        return this.autorizacoes;
+    }
 
-    public abstract void setPerfil(String perfil);
+    public  void setPerfil(String perfil){
+        
+    }
 
-    public abstract void setAutorizado(boolean isAutorizado);
+    public void setAutorizado(boolean isAutorizado){
+        
+    }
 
-    public abstract void setAutenticado(boolean isAutenticado);
+    public void setAutenticado(boolean isAutenticado){
+        
+    }
     
-    public abstract void add(String autorizacao);
+    public void add(String autorizacao){
+        
+    }
 
-    public abstract String getCPF();
+    public String getCPF(){
+        return this.CPF;
+    }
 
-    public abstract void setCPF(String CPF);
+    public void setCPF(String CPF){
+        
+    }
     
 }
